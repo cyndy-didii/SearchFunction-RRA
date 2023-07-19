@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.appcompat.widget.SearchView;
@@ -25,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize the ListView
         restaurantListView = findViewById(R.id.restaurantList);
 
-        // Dummy data for restaurant types
         restaurantTypes = new ArrayList<>(Arrays.asList(
                 "Abdul Restaurant",
                 "Anjani Cuisine",
@@ -38,18 +34,14 @@ public class MainActivity extends AppCompatActivity {
                 "Frank Fast Food"
         ));
 
-        // Create a custom adapter to use the custom layout for the list items
         adapter = new RestaurantAdapter(this, restaurantTypes);
         restaurantListView.setAdapter(adapter);
 
-        // Handle item clicks with ripple effect
         restaurantListView.setOnItemClickListener((parent, view, position, id) -> {
-            // Show the clicked restaurant name in a toast
             String selectedRestaurant = restaurantTypes.get(position);
             Toast.makeText(MainActivity.this, "Clicked: " + selectedRestaurant, Toast.LENGTH_SHORT).show();
         });
 
-        // Set the app bar as the support action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -68,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Filter the restaurant list based on the search text
                 adapter.getFilter().filter(newText);
                 return true;
             }

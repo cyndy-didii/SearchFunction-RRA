@@ -19,7 +19,7 @@ public class RestaurantAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private ArrayList<String> restaurantTypes;
-    private ArrayList<String> originalList; // Original, unfiltered list
+    private ArrayList<String> originalList;
     private Filter restaurantFilter;
 
     public RestaurantAdapter(Context context, ArrayList<String> restaurantTypes) {
@@ -37,15 +37,12 @@ public class RestaurantAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(context).inflate(R.layout.list_item_restaurant, parent, false);
         }
 
-        // Get references to the views in the custom layout
         ImageView restaurantIcon = convertView.findViewById(R.id.restaurantIcon);
         TextView restaurantName = convertView.findViewById(R.id.restaurantName);
 
-        // Set the restaurant name
         String name = restaurantTypes.get(position);
         restaurantName.setText(name);
 
-        // Set a placeholder image for the restaurant icon
         restaurantIcon.setImageResource(R.drawable.ic_launcher_background);
 
         return convertView;
@@ -59,7 +56,6 @@ public class RestaurantAdapter extends ArrayAdapter<String> {
                 List<String> filteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0) {
-                    // No filter applied, return the original list
                     filteredList.addAll(originalList);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
